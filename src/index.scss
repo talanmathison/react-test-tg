@@ -1,0 +1,112 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+// A partir de esta linea agregamos código
+// de SASS para generar un estilo propio.
+
+// Declaremos un par de variables:
+$a-tags: 'a, a:active, a:hover, a:visited';
+$a-tags-hover: 'a:active, a:hover';
+
+// Definamos el estilo del menú
+// de navegación
+
+nav {
+  border: 1px solid black;
+
+  ul>li {
+    list-style-type: none;
+
+    #{$a-tags} {
+      color: blue;
+      text-decoration: none;
+    }
+
+    #{$a-tags-hover} {
+      text-decoration: underline;
+    }
+  }
+}
+
+// Definimos un contenedor general
+.container {
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+// Definimos un row
+.row {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-gap: 20px;
+}
+
+// Generamos las columnas
+
+// A mano:
+// .col-1 {
+//   grid-column: span 1;
+// }
+
+// .col-2 {
+//   grid-column: span 2;
+// }
+
+// Generamos las columnas con SASS
+@for $i from 1 through 12 {
+  .col-#{$i} {
+    grid-column: span $i;
+  }
+}
+
+// Para usar MediaQuery:
+// A mano:
+// @media (min-width: 992px) {
+//   .container {
+//     width: 960px;
+//   }
+
+//   .col-lg-1 {
+//     grid-column: span 1;
+//   }
+
+//   .col-lg-2 {
+//     grid-column: span 2;
+//   }
+// }
+
+// Con SASS
+$bkps: 576px, 768px, 992px, 1200px, 1400px;
+$bkps-container: 540px, 720px, 960px, 1140px, 1320px;
+$bkps-suffix: sm, md, lg, xl, xxl;
+
+@for $i from 1 to 5 {
+  $bkp: nth($bkps, $i);
+  $cont: nth($bkps-container, $i);
+  $suff: nth($bkps-suffix, $i);
+
+  @media (min-width: #{$bkp}) {
+    .container {
+      width: #{$cont};
+    }
+
+    @for $i from 1 through 12 {
+      .col-#{$suff}-#{$i} {
+        grid-column: span $i;
+      }
+    }
+  }
+}
