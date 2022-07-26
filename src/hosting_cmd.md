@@ -39,3 +39,21 @@
   <BrowserRouter basename={process.env.PUBLIC_URL}>
   ```
   - Al cambiar algo, debemos hacer siempre un `npm run deploy` para subir los cambios a producción en Github Pages.
+  - Si se hace un _deploy_ se actualiza automáticamente la rama `gh-pages` del repos, pero *NO* se subió el código a `main`, debemos hacer un commit y un push manuales.
+
+## Netlify (Web)
+
+  - Crear una cuenta nueva en: https://www.netlify.com/
+  - Agregar un nuevo sitio:
+    - El sitio lo importamos, es decir, usamos la opción _import an existing project_.
+    - Seleccionamos la importación desde Github.
+    - Elegimos el repos adecuado y la rama (_branch_).
+    - Damos click en _Deploy site_.
+  - Si el _deploy_ falla, vamos a inspeccionar el log.
+  - Notamos que los _warnings_ están siendo tratados como errores.
+  - Vamos a _Site settings_ -> _Build & deploy_  -> _Build Settings_ -> _Edit_
+  - Nos aseguramos de que en _Build command_ esté escrito:
+  ```
+  CI='' npm run build
+  ```
+  - Regresamos a _Deploys_ y buscamos el botón _Trigger deploy_ -> Deploy site_.
