@@ -22,3 +22,20 @@
   "deploy": "gh-pages -d build"
   ```
   - Vamos a Github y creamos un nuevo repo.
+  - Ejecutamos en la terminal de nuestro proyecto:
+    - Inicializamos el repos local: `git init`
+    - Agreamos todos nuestros archivos al tracker de GIT: `git add .`
+    - Guardamos los cambios: `git commit -m "Initial commit"`
+    - Establecemos la rama a main: `git branch -M main`
+    - Designamos la URL remota del repositorio en Github: `git remote add origin MI_URL`
+    - Enviamos los cambios a Github: `git push -u origin main`
+  - Abrimos `package.json` y agregamos:
+  ```
+  "homepage": "https://MI_USUARIO.github.io/MI_PROYECTO"
+  ```
+  - Ejecutamos: `npm run deploy`
+  - Como estamos en un proyecto de Github, esto se ve en la URL pública como un _directorio_. Entonces, debemos establecer en `BrowserRouter` la _base_ de la página:
+  ```
+  <BrowserRouter basename={process.env.PUBLIC_URL}>
+  ```
+  - Al cambiar algo, debemos hacer siempre un `npm run deploy` para subir los cambios a producción en Github Pages.

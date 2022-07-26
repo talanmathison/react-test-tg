@@ -48,7 +48,7 @@ function App() {
     // al contexto es el "getter" de nuestro
     // "estado local a App".
     <AuthContext.Provider value={[authInfo, setAuthInfo]}>
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Routes>
           <Route path='/' element={<Layout />}>
             <Route index element={<Home />} />
